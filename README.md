@@ -1,14 +1,18 @@
 # Mecha Arena
 
-Um jogo de construção e combate de robôs que desenvolvo com apoio de IA. Você escolhe peças, monta seu robô e disputa arenas contra outras pessoas ou bots.
+O Mecha Arena nasceu da vontade de criar meu próprio jogo de tabuleiro: um passion project de construção e combate de robôs, pensado para jogar à mesa.
 
-O projeto reúne duas coisas de que gosto: criar jogos e investigar como pequenas mudanças nas regras afetam as decisões e os resultados.
+Ao experimentar as regras, percebi que era mais fácil desenvolver um motor de jogo junto ao Codex e testar as ideias em código do que acompanhar tudo com papel e caneta. A versão digital cresceu a partir dessa necessidade.
+
+Com bots de comportamentos diferentes, também ficou mais fácil testar milhares de partidas e comparar estratégias do que reunir jogadores presenciais a cada mudança. Isso me deu espaço para experimentar e investigar o balanceamento antes de levar as ideias à mesa.
+
+No jogo, você escolhe peças, monta seu robô e disputa arenas contra outras pessoas ou bots.
 
 **[Jogar Mecha Arena](https://mecha-arena-multiplayer.victor-hrb.chatgpt.site)**
 
 ## Como uso IA
 
-Uso o Codex para implementar mecânicas, desenvolver a interface, escrever testes e explorar alternativas. Meu trabalho é definir as regras, orientar o desenvolvimento, revisar o comportamento do jogo e decidir o que manter ou mudar.
+Uso o Codex para transformar as regras do jogo de tabuleiro em um motor que posso testar, implementar os bots e desenvolver a interface. Meu trabalho é definir as mecânicas, orientar o desenvolvimento, revisar o comportamento do jogo e decidir o que manter ou mudar.
 
 Os adversários do jogo usam estratégias programadas. A IA generativa entra no processo de desenvolvimento.
 
