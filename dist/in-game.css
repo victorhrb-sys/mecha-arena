@@ -1,0 +1,16 @@
+/* Essential match information; explanations stay in contextual help. */
+.is-playing .phase-heading h1{margin-bottom:0}.is-playing .decision-heading{min-height:70px}
+.is-playing .card-desc{display:flex!important;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap}.card-desc .hp-symbol{display:inline-flex}
+.is-playing .mobile-card-effect{display:none!important}.is-playing .inventory-cards .card-desc{font-size:12px;line-height:1.35}
+.scene-shop.is-playing .market-cards .equipment.small{min-height:120px}.scene-shop .market-cycle{margin-bottom:10px}
+.phase-heading .help-content{font-size:14px}.selection-tools .help-tip{margin-left:6px}
+.is-playing .assembly-work > .selection-tools.is-empty {min-height:0;height:0;margin:0}.is-playing .assembly-work > .selection-tools:not(.is-empty) {min-height:60px}.is-playing .inventory-cards .equipment.small {min-height:100px;height:auto}.is-playing .draft-cards .card-desc {font-size:1rem}
+.phase-heading .help-content{text-transform:none;letter-spacing:normal;font-family:system-ui;font-weight:400}
+@media(min-width:900px){
+ .market-activity-rows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+ .market-activity-row{grid-template-columns:1fr;gap:4px}
+ .market-activity-row + .market-activity-row{border-top:0}
+ .cycle-route,.cycle-steps{grid-template-rows:30px 30px;row-gap:6px}
+ .cycle-step{flex-direction:row;gap:6px}
+ .cycle-bend{top:10px}
+}

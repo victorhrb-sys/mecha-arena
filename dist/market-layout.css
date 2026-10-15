@@ -1,0 +1,34 @@
+/* The shop grows with its contents: one page, no nested scrolling panels. */
+.app-shell.is-playing.scene-shop { height: auto; min-height: 100dvh; overflow: visible; }
+.scene-shop.is-playing > main,
+.scene-shop.is-playing .market-work,
+.scene-shop.is-playing .market-body,
+.scene-shop.is-playing .market-shop,
+.scene-shop.is-playing .market-hangar,
+.scene-shop.is-playing .hangar-body { height: auto; min-height: 0; max-height: none; overflow: visible; }
+.scene-shop.is-playing .market-body { align-items: start; flex: none; gap: 16px; }
+.scene-shop.is-playing .market-shop { padding-top: 8px; }
+.scene-shop.is-playing .market-hangar { padding: 10px; }
+.scene-shop.is-playing .market-cards { gap: 8px; }
+.scene-shop.is-playing .market-cards .equipment.small { height: auto; min-height: 142px; padding: 7px 7px 0; }
+.scene-shop.is-playing .market-cards .card-desc { font-size: .8125rem; }
+.scene-shop.is-playing .market-cards .card-foot { margin-inline: -7px; }
+.scene-shop.is-playing .market-hangar .module .equipment.small,
+.scene-shop.is-playing .market-hangar .empty-slot,
+.scene-shop.is-playing .market-hangar .locked-content { height: auto; min-height: 100px; }
+.scene-shop.is-playing .market-hangar .inventory-cards { flex-wrap: wrap; overflow: visible; }
+.scene-shop.is-playing .market-hangar .inventory-cards .equipment.small { flex: 0 1 100px; max-width: 100%; height: auto; min-height: 78px; }
+.scene-shop.is-playing .market-hangar .selection-tools { height: auto; min-height: 44px; position: static; }
+.scene-shop.is-playing .market-hangar .selection-tools > div { flex-wrap: wrap; }
+.scene-shop.is-playing .market-hangar .selection-tools > span { overflow: visible; }
+.scene-shop .market-activity-rows { max-height: none; overflow: visible; }
+.scene-shop.is-playing > .header { position: sticky; top: 0; z-index: 20; background: #111a20; }
+.scene-shop.is-playing .market-work > .decision-heading { position: sticky; top: 62px; z-index: 10; background: #201d18; }
+@media (max-width: 700px), (max-width: 1000px) and (max-height: 550px) and (pointer: coarse) {
+  .scene-shop.is-playing .market-body { gap: 0; }
+  .scene-shop.is-playing .market-work > .decision-heading { top: 90px; }
+  .scene-shop.is-playing .market-cards .equipment.small { min-height: 94px; }
+  .scene-shop.is-playing .market-hangar .module .equipment.small,
+  .scene-shop.is-playing .market-hangar .empty-slot,
+  .scene-shop.is-playing .market-hangar .locked-content { min-height: 84px; }
+}

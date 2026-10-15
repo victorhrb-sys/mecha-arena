@@ -1,0 +1,43 @@
+.charge-meter {display:inline-flex;align-items:center;gap:6px;white-space:nowrap;color:#b9cbd0;font-size:.75rem;line-height:1.4}
+.charge-icon {display:inline-block;width:1.1em;height:1.1em;flex:none;color:#79e4ef;vertical-align:-.15em}
+.charge-amount {display:inline-flex;align-items:center;gap:.18em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.charge-amount>span {font:inherit}
+.charge-gain {color:#a7f4fa;border-color:#79e4ef80;background:#16353deb}
+.charge-ready>.charge-icon {color:#ffe0a2}
+.charge-segments {display:inline-flex;gap:3px}
+.charge-segments i {display:block;width:7px;height:14px;border:1px solid #5c7983;border-radius:2px;background:#14242c}
+.charge-segments .filled {background:#64dce8;border-color:#91f0f5}
+.charge-ready {color:#ffe0a2}
+.charge-ready .filled {background:#f6cd7b;border-color:#ffe0a2;box-shadow:0 0 6px #f6cd7b66}
+.charge-meter b {font-weight:500}
+.player-hud>.charge-meter {padding:0 12px;flex-wrap:wrap;max-width:145px}
+.player-hud:has(>.charge-meter) {grid-template-columns:minmax(90px,1fr) repeat(3,minmax(65px,90px)) 125px;max-width:780px;gap:12px}
+.player-hud>.charge-meter .charge-label {width:100%;font-size:.875rem}
+.opponent-name>.charge-meter {margin-top:4px}
+.opponent-name .charge-label {display:none}
+.player-dice {display:inline-flex;gap:4px;align-items:center}
+.player-dice .die {flex-shrink:0}
+.is-playing .arena-cockpit .your-die>.player-dice {display:inline-flex;flex-direction:row;gap:4px}
+.is-playing .arena-cockpit .your-die .player-dice>.die {display:grid;width:32px;height:32px;padding:6px;gap:2px;border-radius:5px}
+.dice-pair {display:flex;justify-content:center;gap:8px}
+.dice-unit {display:flex;flex-direction:column;align-items:center}
+.charged-dice {flex:2;position:relative;border-radius:8px;background:#f6cd7b0a;outline:1px solid #f6cd7b55}
+.charged-dice .dice-owner {color:#ffe0a2}
+.charged-dice .dice-cloud {min-width:24px;padding:2px}
+.dice-caption {font-size:.75rem;line-height:1.2;color:#ffe0a2;white-space:nowrap}
+.dice-tray:has(.charged-dice) {gap:6px;padding-inline:8px}
+.dice-tray:has(.charged-dice) .dice-player {--dice-size:24px}
+.dice-tray:has(.charged-dice) .dice-face {gap:2px;padding:4px}
+.dice-tray:has(.charged-dice) .dice-owner {margin-bottom:12px}
+.critical-dice {box-shadow:0 0 18px #f6cd7b66;outline-color:#ffe0a2}
+.roll-highlight {position:absolute;z-index:4;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;color:#fff2cb;background:#121b23ed;border:1px solid #e8bf7380;border-radius:10px;max-width:90%;padding:12px 24px}
+.roll-highlight span {font-size:.875rem;overflow-wrap:anywhere}
+.charged-highlight {top:12px;left:50%;transform:translateX(-50%)}
+.charged-highlight strong {font-size:1rem;font-weight:500}
+.critical-highlight {top:40%;left:50%;transform:translate(-50%,-50%);padding:22px 36px;box-shadow:0 0 65px #e8bf7344,inset 0 0 30px #e8bf731a;animation:critical-arrival calc(.35s * var(--tempo,1)) ease-out both}
+.critical-highlight strong {font-family:var(--display);font-size:clamp(1.75rem,4vw,3rem);font-weight:800;letter-spacing:.1em;color:#ffe0a2}
+@keyframes critical-arrival {from {opacity:0;transform:translate(-50%,-50%) scale(.85)}to {opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@media(max-width:700px){.player-hud>.charge-meter {max-width:105px;padding:0 4px}.charge-segments {gap:2px}.charge-segments i {width:6px;height:11px}.dice-pair {gap:7px}.dice-tray:has(.charged-dice) .dice-player {--dice-size:20px}.dice-caption {font-size:.75rem}.dice-tray:has(.charged-dice) .dice-owner {margin-bottom:7px}.player-dice .die {width:24px;height:24px}}
+@media(prefers-reduced-motion:reduce){.critical-highlight {animation:none}}
+@media(max-width:1000px){.player-hud:has(>.charge-meter) {grid-template-columns:minmax(65px,1fr) repeat(3,minmax(50px,70px)) 100px;gap:8px}.player-hud>.charge-meter {padding:0 4px}}
+@media(max-width:600px){.player-hud:has(>.charge-meter) {grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.player-hud>.charge-meter {max-width:none}.player-hud .charge-label {font-size:.75rem}.player-hud .charge-segments {gap:2px}.player-hud .charge-segments i {width:5px}.player-hud .charge-meter b {display:none}}

@@ -1,0 +1,40 @@
+/* Scrap currency: one yellow screw at every amount, independent of card upgrades. */
+.scrap-icon { display: inline-block; width: 1.15em; height: 1.15em; flex: none; color: #f0c572; vertical-align: -.2em; }
+.scrap-amount { display: inline-flex; align-items: center; gap: .18em; white-space: nowrap; font-variant-numeric: tabular-nums; vertical-align: baseline; }
+.scrap-amount > span { font: inherit; }
+.player-hud .scrap-icon { width: .85em; height: .85em; align-self: center; }
+.resource-gain .scrap-icon { width: 18px; height: 18px; }
+.card-foot .scrap-amount { justify-content: center; }
+.construction-icon { display: block; width: 34px; height: 34px; }
+
+/* Store prices reflect funds, never equipment type. */
+.market-cards .equipment .market-price { color: var(--text); }
+.market-cards .equipment .market-price.insufficient { color: #ffb4ab; }
+
+/* Full HP is a small heart, without the wide equipment-and-text badge. */
+.resource-gain.hp-full { width: 24px; min-width: 24px; height: 24px; padding: 3px; gap: 0; justify-content: center; border-radius: 50%; box-sizing: border-box; }
+.resource-gain.hp-full .full-hp-icon { display: block; width: 16px; height: 16px; flex: none; }
+
+/* Inline effect units share the compact currency treatment. */
+.effect-amount { display: inline-flex; align-items: center; gap: .18em; white-space: nowrap; vertical-align: baseline; font-variant-numeric: tabular-nums; }
+.effect-amount > span { font: inherit; }
+.effect-amount.damage-amount > .equipment-icon,
+.effect-amount.movement-amount > .equipment-icon { display: inline-block; width: 1.15em; height: 1.15em; min-width: 0; margin: 0; flex: none; }
+.effect-amount.damage-amount > .equipment-icon { color: #f47f75; }
+.effect-amount.movement-amount > .equipment-icon { color: #6dd6e5; }
+
+/* HP and maximum HP use the same heart; the suffix distinguishes capacity. */
+.hp-amount { display: inline-flex; align-items: center; gap: .18em; white-space: nowrap; vertical-align: baseline; font-variant-numeric: tabular-nums; }
+.hp-amount > span { font: inherit; }
+.hp-symbol { display: inline-flex; align-items: center; gap: .08em; color: #e6a5b3; white-space: nowrap; vertical-align: middle; }
+.hp-symbol > .full-hp-icon { display: block; width: 1em; height: 1em; flex: none; }
+.hp-symbol.hp-maximum > small { font: 600 .65em/1 var(--font); align-self: flex-end; margin-bottom: .05em; color: inherit; }
+
+.improvements-balance { color: var(--text); margin-bottom: 16px; }
+.improvement-section + .improvement-section { margin-top: 20px; }
+.improvement-section h3 { margin-bottom: 8px; font-size: 1rem; }
+.improvement-section > .btn { margin-top: 10px; }
+.improvement-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.improvement-piece { display: flex; align-items: center; gap: 8px; flex: 1 1 160px; }
+.improvement-piece > .equipment-icon { width: 24px; height: 24px; flex: none; color: var(--card-color); }
+.improvement-piece small { display: block; color: var(--muted); font-size: .875rem; }

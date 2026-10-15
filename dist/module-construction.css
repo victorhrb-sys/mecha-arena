@@ -1,0 +1,27 @@
+/* Mobile controls are absent from the desktop layout. */
+.mobile-panels, .mobile-card-effect { display: none; }
+
+/* Unlock where the new module belongs; the engine also validates its index. */
+.is-playing .module .module-construction {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-content: center;
+  justify-items: center;
+  gap: 10px;
+  padding: 8px;
+  text-align: center;
+  border: 1px dashed #576671;
+  border-top: 3px solid #606f78;
+  background: repeating-linear-gradient(135deg, #88959c08 0 5px, transparent 5px 11px), #172127;
+  border-radius: 6px;
+  color: #aebdc4;
+  opacity: 1;
+}
+.is-playing .module-construction .construction-symbol { display: grid; place-items: center; line-height: 1; }
+.is-playing .module-construction > .scrap-amount { font: 650 1.125rem/1.2 var(--display); }
+.is-playing .module-construction:disabled .scrap-icon { color: inherit; }
+.is-playing .module .module-construction:not(:disabled) { cursor: pointer; background-color: #332c20; border-style: solid; border-color: var(--gold); color: #ffe1a4; }
+.is-playing .module-construction:not(:disabled):hover { background-color: #453924; }
+.is-playing .module-construction:focus-visible { outline: 2px solid #eff3ed; outline-offset: 2px; }

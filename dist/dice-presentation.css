@@ -1,0 +1,51 @@
+/* Improvement A: compact colored dice, driven only by saved roll results. */
+.solo-arena .board-stage { position: relative; }
+.dice-presentation { position: relative; min-width: 0; pointer-events: none; }
+.dice-tray { width: 100%; box-sizing: border-box; display: flex; justify-content: center; gap: clamp(8px,2vw,22px); padding: 12px 16px 4px; border-radius: 14px; background: #10191fe8; border: 1px solid #71848d66; box-shadow: 0 12px 35px #0009; max-width: 100%; }
+.dice-player { --dice-size: 38px; display: flex; flex-direction: column; align-items: center; width: clamp(44px,6vw,76px); min-width: 0; }
+.dice-owner { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .75rem; color: var(--dice-color); margin-bottom: 20px; }
+.dice-space { width: var(--dice-size); height: var(--dice-size); perspective: 350px; position: relative; }
+.dice-space::before { content: ''; position: absolute; left: -8px; right: -8px; bottom: -9px; height: 12px; border-radius: 50%; background: #0009; filter: blur(4px); }
+.dice-toss,.dice-cube { width: 100%; height: 100%; transform-style: preserve-3d; }
+.dice-face { position: absolute; inset: 0; display: grid; grid-template: repeat(3,1fr)/repeat(3,1fr); gap: 3px; padding: 6px; border: 1px solid #ffffff80; border-radius: 5px; background: var(--dice-color); box-shadow: inset 0 0 8px #0003; backface-visibility: hidden; }
+.dice-face-1 { transform: translateZ(calc(var(--dice-size)/2)); }
+.dice-face-6 { transform: rotateY(180deg) translateZ(calc(var(--dice-size)/2)); }
+.dice-face-2 { transform: rotateY(90deg) translateZ(calc(var(--dice-size)/2)); }
+.dice-face-5 { transform: rotateY(-90deg) translateZ(calc(var(--dice-size)/2)); }
+.dice-face-3 { transform: rotateX(90deg) translateZ(calc(var(--dice-size)/2)); }
+.dice-face-4 { transform: rotateX(-90deg) translateZ(calc(var(--dice-size)/2)); }
+.dice-face i { border-radius: 50%; }
+.dice-face .dice-pip { background: #172028; }
+.dice-cloud { display: inline-flex; align-items: center; justify-content: center; height: 28px; min-width: 36px; margin-top: 16px; border-radius: 14px; padding: 3px 7px; color: var(--dice-color); background: #2a3743; visibility: hidden; }
+.dice-cloud .equipment-icon { width: 20px; height: 20px; }
+.dice-cloud sup { font-size: .65rem; }
+.dice-revealed .dice-cloud { visibility: visible; }
+.dice-pulse .dice-cloud { animation: dice-cloud-rise calc(.4s * var(--tempo,1)) ease-out both; }
+@keyframes dice-cloud-rise { from { opacity: 0; transform: translateY(6px) scale(.85); } to { opacity: 1; transform: translateY(-3px) scale(1); } }
+@media(max-width:700px),(max-height:550px) { .dice-player { --dice-size: 30px; } .dice-face { padding: 4px; gap: 2px; } .dice-tray { gap: 8px; padding-inline: 10px; } .dice-owner { margin-bottom: 14px; } }
+@media(prefers-reduced-motion:reduce) { .dice-revealed .dice-cloud { animation: none; } }
+
+/* Persistent side panel; results remain until the next roll. */
+.is-playing .arena-cockpit { grid-template-columns: minmax(0,1fr); grid-template-rows: 126px 160px minmax(0,1fr) 46px; grid-template-areas: 'dice' 'equipment' 'opponents' 'speed'; gap: 8px; }
+.is-playing .arena-cockpit > .dice-presentation { grid-area: dice; }
+.is-playing .arena-cockpit > .arena-player { grid-area: equipment; height: 160px; padding: 8px; grid-template-rows: 30px 48px 22px 4px; gap: 8px; }
+.is-playing .arena-cockpit > .opponents-panel { grid-area: opponents; }
+.is-playing .arena-cockpit > .speed-control { grid-area: speed; }
+.dice-tray { height: 100%; gap: 8px; padding: 8px 10px 4px; box-shadow: none; }
+.dice-player { --dice-size: 30px; flex: 1; width: auto; }
+.dice-owner { margin-bottom: 16px; }
+.dice-cloud { margin-top: 10px; height: 24px; }
+.dice-unrolled { opacity: .35; }
+@media (max-width: 700px), (max-width: 1000px) and (max-height: 550px) and (pointer: coarse) {
+  .is-playing .solo-arena { grid-template-columns: minmax(0,1fr); grid-template-rows: 78px 34px 92px minmax(0,1fr) 72px 38px; grid-template-areas: 'controls' 'tabs' 'dice' 'board' 'feed' 'speed'; }
+  .is-playing .solo-arena[data-mobile-pane=robots] { grid-template-rows: 78px 34px 92px 156px minmax(0,1fr) 38px; grid-template-areas: 'controls' 'tabs' 'dice' 'equipment' 'opponents' 'speed'; }
+  .dice-player { --dice-size: 24px; }
+  .dice-owner { margin-bottom: 9px; }
+  .dice-tray { padding: 4px 10px; }
+  .dice-cloud { margin-top: 6px; height: 18px; }
+  .dice-cloud .equipment-icon { width: 16px; height: 16px; }
+}
+@media (max-width: 1000px) and (max-height: 550px) and (pointer: coarse) {
+  .is-playing .solo-arena { grid-template-columns: minmax(0,1fr) minmax(220px,.7fr); grid-template-rows: 78px 34px 92px minmax(0,1fr) 38px; grid-template-areas: 'board controls' 'board tabs' 'board dice' 'board feed' 'board speed'; }
+  .is-playing .solo-arena[data-mobile-pane=robots] { grid-template-columns: minmax(0,1fr) minmax(220px,.7fr); grid-template-rows: 78px 34px 92px minmax(0,1fr) 38px; grid-template-areas: 'equipment controls' 'equipment tabs' 'equipment dice' 'opponents opponents' 'speed speed'; }
+}

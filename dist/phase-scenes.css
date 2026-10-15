@@ -1,0 +1,142 @@
+/* Each phase is a place. Shared resources, card colors and controls stay familiar. */
+.app-shell.is-playing {
+  position: relative;
+  isolation: isolate;
+  --phase-accent: #8dcff5;
+  --phase-line: #416c83;
+  --phase-ink: #142630;
+  background-color: #101b23;
+}
+.app-shell.is-playing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: linear-gradient(90deg, #09131be8, #09131b94 50%, #09131b66), var(--phase-backdrop);
+  background-position: center;
+  background-size: cover;
+}
+.is-playing.scene-shop {
+  --phase-backdrop: url('./assets/phase-shop.png');
+  --phase-accent: #f6cb84;
+  --phase-line: #88623c;
+  --phase-ink: #39291c;
+}
+.is-playing.scene-workshop {
+  --phase-backdrop: url('./assets/phase-workshop.png');
+  --phase-accent: #8dd6fa;
+  --phase-line: #456f89;
+  --phase-ink: #172c3b;
+}
+.is-playing.scene-arena {
+  --phase-backdrop: url('./assets/phase-arena.png');
+  --phase-accent: #ffaf91;
+  --phase-line: #885147;
+  --phase-ink: #362323;
+}
+.app-shell.is-playing.scene-shop::before { background-image: linear-gradient(90deg, #19130feb, #17130fa3 48%, #17130f66), var(--phase-backdrop); }
+.app-shell.is-playing.scene-arena::before { background-image: linear-gradient(90deg, #161015dc, #17101799 52%, #17101766), var(--phase-backdrop); }
+.is-playing > .header { background: #10171deb; border-bottom-color: #5b6d755e; margin-inline: -24px; padding-inline: 24px; }
+.is-playing .decision-heading {
+  min-height: 86px;
+  padding: 12px 18px;
+  margin: 0 0 12px;
+  border: 1px solid var(--phase-line);
+  border-left: 5px solid var(--phase-accent);
+  border-radius: 7px;
+  background-image: linear-gradient(90deg, var(--phase-ink), #10171de8 38%, #10171d70 72%, #10171d96), var(--phase-backdrop);
+  background-size: cover;
+  background-position: center, center 35%;
+  box-shadow: 0 5px 18px #0002;
+}
+.phase-heading { min-width: 0; }
+.is-playing .phase-heading h1 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  color: var(--phase-accent);
+  font-size: clamp(1.4rem, 2.15vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: .015em;
+  text-transform: uppercase;
+}
+.phase-heading p { margin-top: 5px; color: #d4dce0; font-size: .875rem; line-height: 1.4; }
+.phase-heading .help-trigger { color: #c5cfd4; border-color: #99afb478; }
+.is-playing .phasebar { padding-block: 10px; margin-bottom: 0; min-height: 48px; }
+.is-playing .phasebar ol { gap: 16px; }
+.is-playing .phasebar li { padding: 4px 9px; border: 1px solid transparent; border-radius: 4px; background: #10171d82; color: #bfccd2; }
+.is-playing .phasebar li.current { border-color: var(--phase-line); background: var(--phase-ink); color: var(--phase-accent); }
+.is-playing .phasebar li.current::before { display: none; }
+.is-playing .phasebar .round-label { color: #d4dce0; }
+.is-playing .phasebar .round-label strong { color: #f1f2e9; }
+.is-playing .assembly-body { border: 1px solid var(--phase-line); background: #10212dbb; border-radius: 7px; padding: 18px 14px 10px; }
+.scene-workshop .assembly-body .module-label { color: #b3d4e7; }
+.scene-workshop .assembly-body .module .empty-slot { background: #142f3ca8; border-color: #5b8092; }
+.scene-workshop .assembly-body .module .locked-content { background: #14212b; }
+.scene-workshop .inventory-section { border-top-color: #49697b; }
+.scene-workshop .selection-tools { background: #152937; border-left-color: var(--phase-accent); }
+.scene-workshop .assembly-warning { padding: 6px 12px; margin-bottom: 8px; background: #112331ef; border-radius: 4px; color: #dae8ef; }
+.is-playing.scene-shop .market-shop { border: 1px solid var(--phase-line); border-radius: 7px; padding: 14px; background: #231d17c9; }
+.is-playing.scene-shop .market-hangar { border-color: #70614d; background: #1c201fe8; }
+.scene-shop .market-context { border-bottom: 1px solid #725c3d; padding-bottom: 10px; color: #f1dfc7; }
+.scene-shop .market-cards .equipment { background: linear-gradient(160deg, #34302a, #252723); }
+.scene-shop .market-cards .card-foot { background: #3b3022; }
+.scene-shop .market-hangar .selection-tools { background: #2c2a22; border-left-color: var(--phase-accent); }
+.scene-shop .inventory-section { border-top-color: #655b46; }
+.is-playing.scene-workshop .draft-cards .equipment { background: linear-gradient(160deg, #263f50, #192830); }
+.scene-workshop .draft-collected { border-color: #527489; background: #122331df; padding: 12px; border-radius: 5px; }
+.is-playing .bot-phase-heading { display: flex; align-items: center; flex: none; }
+.is-playing .bot-progress { background: #15212be8; border-color: var(--phase-line); }
+.scene-shop .bot-progress { background: #272019e8; }
+.is-playing .bot-progress-mark { color: var(--phase-accent); }
+.is-playing .arena-main { grid-template-rows: 62px minmax(0, 1fr) 112px; }
+.is-playing .arena-toolbar { padding: 5px 12px; border: 1px solid var(--phase-line); border-left: 5px solid var(--phase-accent); border-radius: 7px; background: linear-gradient(90deg, var(--phase-ink), #10171ddd); }
+.is-playing .arena-toolbar .phase-heading h1 { font-size: 1.4rem; }
+.is-playing .arena-toolbar .phase-heading p { margin-top: 2px; }
+.is-playing.scene-arena .board-stage {
+  border-color: #885d58;
+  background-image: radial-gradient(ellipse at center, #151b23e0 12%, #1f141d7d 66%, #28181991), url('./assets/phase-arena.png');
+  background-position: center;
+  background-size: cover;
+  box-shadow: inset 0 0 60px #130e17;
+}
+.scene-arena .arena-feed { border-color: #725352; background: #1c1b22f2; }
+.scene-arena .feed-heading { border-bottom-color: #56464d; }
+.scene-arena .opponents-panel { background: #171d24e8; border: 1px solid #5e4a4d; border-radius: 6px; padding: 10px; }
+.is-playing.scene-arena .arena-cockpit > .speed-control { background: #161c24f0; border-color: #654c51; }
+
+@media (max-width: 1100px) {
+  .is-playing .phase-heading h1 { font-size: 1.5rem; }
+  .is-playing .arena-toolbar .phase-heading h1 { font-size: 1.4rem; }
+}
+@media (max-width: 900px) {
+  .is-playing .decision-heading { min-height: 82px; padding: 10px 12px; }
+  .is-playing .arena-main { grid-template-rows: 88px minmax(0, 1fr) 106px; }
+  .is-playing .arena-toolbar .arena-title { grid-template-rows: 28px 40px; gap: 5px; }
+  .is-playing .arena-toolbar .phase-heading { display: flex; align-items: baseline; gap: 12px; }
+  .is-playing .arena-toolbar .phase-heading p { margin: 0; }
+  .is-playing .arena-toolbar .phase-heading h1 { font-size: 1.35rem; }
+  .phase-heading p { font-size: .875rem; }
+  .is-playing .phasebar ol { gap: 6px; }
+}
+@media (max-width: 700px) {
+  .is-playing > .header { margin-inline: -10px; padding-inline: 10px; }
+  .is-playing .phasebar { min-height: 40px; padding-block: 6px; }
+  .is-playing .phase-heading h1 { font-size: 1.125rem; gap: 7px; }
+  .is-playing .decision-heading { gap: 10px; padding: 10px; margin-bottom: 8px; }
+  .phase-heading p { line-height: 1.3; }
+  .is-playing .assembly-body { padding: 10px 7px; }
+  .is-playing.scene-shop .market-shop { padding: 9px; }
+  .scene-arena .opponents-panel { padding: 7px; }
+  .is-playing .arena-main { grid-template-rows: 84px minmax(0, 1fr) 94px; }
+  .is-playing .arena-toolbar { padding: 5px 9px; }
+  .is-playing .arena-toolbar .arena-title { grid-template-rows: 28px 38px; }
+}
+@media (max-width: 550px) {
+  .is-playing .decision-heading .btn { max-width: 44%; padding-inline: 9px; }
+  .is-playing .phase-heading h1 { font-size: 1rem; }
+  .is-playing .draft-layout .decision-heading { flex-wrap: nowrap; }
+  .choice-progress { white-space: normal; text-align: right; }
+}

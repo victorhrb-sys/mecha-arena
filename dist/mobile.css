@@ -1,0 +1,147 @@
+/* Loaded only for narrow screens, or a short landscape touch screen.
+   Desktop layout rules live in styles.css and phase-scenes.css. */
+.app-shell.is-playing {
+  width: 100%;
+  height: 100dvh;
+  padding: 0 max(8px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+}
+.is-playing > .header { height: 90px; min-height: 90px; grid-template-rows: 30px 52px; gap: 2px 8px; padding-bottom: 4px; margin-inline: -8px; padding-inline: 8px; display: grid; grid-template-columns: 1fr auto; }
+.is-playing .wordmark { font-size: .75rem; gap: 5px; }
+.is-playing .wordmark strong { display: inline; font-size: .875rem; margin-left: 4px; }
+.is-playing .logo-mark { display: none; }
+.is-playing .header nav { grid-row: 1; grid-column: 2; }
+.is-playing .header nav .btn { min-height: 30px; padding: 4px 9px; }
+.is-playing .player-hud { height: 52px; grid-column: 1 / -1; grid-row: 2; width: 100%; max-width: none; padding: 3px 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; background: #19252cef; }
+.hud-identity { display: none; }
+.hud-stat > span { font-size: .875rem; }
+.hud-stat > strong { font-size: 1.4rem; }
+.is-playing .phasebar { display: none; }
+.is-playing > .notice, .is-playing > .message, .is-playing > .warning { font-size: .875rem; line-height: 1.3; padding: 5px 8px; margin: 4px 0; }
+.is-playing .work-layout { padding-top: 6px; }
+.is-playing .decision-heading { min-height: 52px; padding: 7px 9px; margin-bottom: 6px; gap: 8px; }
+.is-playing .decision-heading .phase-heading p { display: none; }
+.is-playing .decision-heading .phase-heading h1 { font-size: 1rem; line-height: 1.2; }
+.is-playing .decision-heading .btn { min-height: 38px; min-width: 0; font-size: .875rem; padding: 6px 9px; max-width: 48%; }
+.is-playing .choice-progress { font-size: 1rem; }
+.is-playing .choice-progress small { font-size: .75rem; }
+.mobile-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; height: 36px; min-height: 36px; margin-bottom: 6px; flex: none; }
+.mobile-panels .btn { min-height: 34px; padding: 5px 8px; border-color: #6479856b; border-radius: 5px; background: #15232bed; color: #c4d0d6; font-size: .875rem; }
+.mobile-panels .btn[aria-pressed=true] { color: var(--phase-accent, #e8bf73); background: var(--phase-ink, #26313a); border-color: var(--phase-accent, #e8bf73); }
+
+/* One decision surface at a time; cash and the end-turn command stay visible. */
+.is-playing .market-body { display: flex; flex-direction: column; gap: 0; }
+.is-playing .market-body > section { flex: 1; min-height: 0; }
+.is-playing .market-body[data-mobile-pane=shop] > .market-hangar,
+.is-playing .market-body[data-mobile-pane=robot] > .market-shop { display: none; }
+.is-playing.scene-shop .market-shop { padding: 7px; }
+.is-playing .market-context { min-height: 24px; margin-bottom: 6px; padding-bottom: 5px; font-size: .875rem; }
+.is-playing .market-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-bottom: 6px; }
+.is-playing .market-cards .equipment.small { height: clamp(88px, 13.5dvh, 108px); min-height: 88px; display: grid; grid-template-columns: 32px minmax(0, 1fr); grid-template-rows: 23px minmax(24px, 1fr) 22px; gap: 0 6px; padding: 5px 6px 0; }
+.is-playing .market-cards .card-top { position: absolute; left: 5px; top: 3px; min-height: 0; }
+.is-playing .market-cards .card-reference { font-size: .75rem; }
+.is-playing .market-cards .upgrade-badge { font-size: 0; }
+.is-playing .market-cards .upgrade-badge::after { content: '✦'; font-size: .75rem; }
+.is-playing .market-cards .card-symbol { grid-row: 1 / 3; grid-column: 1; min-height: 0; padding: 13px 0 0; }
+.is-playing .market-cards .card-symbol .equipment-icon { width: 27px; height: 27px; }
+.is-playing .market-cards .card-name { grid-column: 2; grid-row: 1; text-align: left; font-size: .875rem; margin: 1px 0 0; align-self: center; }
+.is-playing .market-cards .card-desc { display: none; }
+.is-playing .market-cards .mobile-card-effect { display: block; grid-column: 2; grid-row: 2; font-size: .875rem; line-height: 1.2; align-self: center; color: #c4d2d6; }
+.is-playing .market-cards .card-foot { grid-row: 3; grid-column: 1 / -1; margin: 0 -6px; padding: 1px 4px; font-size: .875rem; align-self: stretch; }
+.is-playing .market-hangar { padding: 7px; }
+.is-playing .market-hangar .owned-heading { margin-bottom: 5px; }
+.is-playing .market-hangar .owned-heading h2 { font-size: .875rem; }
+.is-playing .market-hangar .modules:not(.compact), .is-playing .assembly-body .modules:not(.compact) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+.is-playing .module-label, .is-playing .market-hangar .module-label { height: 20px; padding: 0 0 3px; font-size: .875rem; }
+.is-playing .module .equipment.small, .is-playing .module .empty-slot, .is-playing .module .locked-content,
+.is-playing .market-hangar .module .equipment.small, .is-playing .market-hangar .empty-slot, .is-playing .market-hangar .locked-content { height: clamp(84px, 13dvh, 102px); min-height: 84px; padding: 5px 6px; }
+.is-playing .module .equipment.small .card-symbol { min-height: 22px; padding: 1px 0; }
+.is-playing .module .equipment.small .card-symbol .equipment-icon { width: 25px; height: 25px; }
+.is-playing .module .equipment.small .card-name { font-size: .875rem; margin: 2px 0 0; }
+.is-playing .module .module-construction { gap: 7px; }
+.is-playing .module-construction .construction-icon { width: 28px; height: 28px; }
+.is-playing .module-construction > .scrap-amount { font-size: 1rem; }
+.is-playing .assembly-body { padding: 7px; }
+.is-playing .assembly-warning { margin-bottom: 5px; padding: 4px 6px; font-size: .875rem; }
+.is-playing .inventory-section { margin-top: 6px; padding-top: 6px; }
+.is-playing .inventory-section .panel-title { margin-bottom: 4px; }
+.is-playing .inventory-section h2 { font-size: .875rem; }
+.is-playing .inventory-cards { padding: 3px; gap: 6px; }
+.is-playing .inventory-cards .equipment.small { height: 72px; min-height: 72px; flex-basis: 94px; padding: 4px; }
+.is-playing .inventory-cards .equipment.small .card-symbol .equipment-icon { width: 20px; height: 20px; }
+.is-playing .inventory-cards .equipment.small .card-name { font-size: .875rem; }
+.is-playing .assembly-work > .selection-tools, .is-playing .market-hangar .selection-tools { display: grid; grid-template-rows: minmax(0, 1fr) auto; height: 82px; min-height: 82px; padding: 5px 7px; gap: 3px; margin-top: 5px; }
+.is-playing .selection-tools > span { overflow: auto; display: block; font-size: .875rem; }
+.is-playing .selection-tools > span small { display: none; }
+.is-playing .selection-tools > div { display: flex; flex-wrap: nowrap; gap: 5px; }
+.is-playing .selection-tools .btn { flex: 1; min-height: 38px; font-size: .875rem; padding: 5px 7px; }
+.is-playing .selection-tools.is-empty { background: none; padding: 0; }
+
+/* Three readable choices instead of three narrow columns. */
+.is-playing .draft-cards { grid-template-columns: minmax(0, 1fr); grid-template-rows: repeat(3, minmax(84px, 1fr)); gap: 8px; max-height: 390px; margin: 3px 0 6px; overflow: auto; }
+.is-playing .draft-cards .equipment { display: grid; grid-template-columns: 46px minmax(0, 1fr) 55px; grid-template-rows: auto auto; gap: 2px 10px; padding: 10px; }
+.is-playing .draft-cards .card-top { position: absolute; left: 5px; top: 3px; }
+.is-playing .draft-cards .upgrade-badge { font-size: 0; }
+.is-playing .draft-cards .upgrade-badge::after { content: '✦'; font-size: .75rem; }
+.is-playing .draft-cards .card-symbol { grid-column: 1; grid-row: 1 / 3; min-height: 0; padding: 7px 0 0; }
+.is-playing .draft-cards .card-symbol .equipment-icon { width: 34px; height: 34px; }
+.is-playing .draft-cards .card-name { grid-column: 2; grid-row: 1; text-align: left; font-size: 1rem; align-self: end; margin: 0; }
+.is-playing .draft-cards .card-desc { grid-column: 2; grid-row: 2; text-align: left; font-size: .875rem; line-height: 1.3; padding: 0; margin: 0; }
+.is-playing .draft-cards .card-foot { grid-column: 3; grid-row: 1 / 3; display: grid; place-items: center; padding: 5px; margin: -10px -10px -10px 0; border-top: 0; border-left: 1px solid #ffffff15; font-size: .875rem; }
+.is-playing .draft-collected { margin: 0; padding: 7px; gap: 5px 10px; }
+.is-playing .draft-collected > span:first-child { width: auto; }
+.is-playing .bot-progress { padding: 12px; }
+
+/* The board gets the space previously occupied by a second full cockpit. */
+.is-playing .solo-arena { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 78px 34px minmax(0, 1fr) 72px 38px; grid-template-areas: 'controls' 'tabs' 'board' 'feed' 'speed'; gap: 6px; margin-top: 6px; }
+.is-playing .solo-arena > .mobile-panels { grid-area: tabs; grid-template-columns: 1fr 1fr 84px; height: 34px; min-height: 34px; margin: 0; }
+.mobile-roll { display: flex; align-items: center; justify-content: flex-end; gap: 6px; font-size: .875rem; }
+.mobile-roll .die { width: 26px; height: 26px; padding: 4px; gap: 2px; border-radius: 4px; flex: none; }
+.mobile-roll .die i { width: 4px; height: 4px; }
+.is-playing .solo-arena .arena-main, .is-playing .solo-arena .arena-cockpit { display: contents; }
+.is-playing .arena-toolbar { grid-area: controls; padding: 4px 8px; }
+.is-playing .arena-toolbar .arena-title { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 26px 38px; gap: 3px; }
+.is-playing .arena-toolbar .phase-heading { display: flex; align-items: baseline; gap: 10px; }
+.is-playing .arena-toolbar .phase-heading h1 { font-size: 1.125rem; }
+.is-playing .arena-toolbar .phase-heading p { margin: 0; font-size: .875rem; }
+.is-playing .arena-controls { grid-template-columns: 1fr 1.2fr; gap: 6px; }
+.is-playing .arena-controls .btn { height: 38px; min-height: 38px; padding: 5px 8px; font-size: .875rem; }
+.is-playing .board-stage { grid-area: board; }
+.is-playing .arena-feed { grid-area: feed; grid-template-rows: 26px minmax(0, 1fr); }
+.is-playing .feed-heading { padding-inline: 8px; }
+.is-playing .feed-heading > span, .is-playing .feed-heading .journal-button { font-size: .75rem; }
+.is-playing .feed-body { padding: 4px; }
+.is-playing .feed-body .arena-feedback, .is-playing .feed-body .resource-readout { font-size: .875rem; padding: 2px; }
+.is-playing .arena-cockpit > .speed-control { grid-area: speed; padding: 5px 8px; min-height: 38px; }
+.is-playing .solo-arena[data-mobile-pane=battle] .arena-player,
+.is-playing .solo-arena[data-mobile-pane=battle] .opponents-panel { display: none; }
+.is-playing .solo-arena[data-mobile-pane=robots] { grid-template-rows: 78px 34px 156px minmax(0, 1fr) 38px; grid-template-areas: 'controls' 'tabs' 'equipment' 'opponents' 'speed'; }
+.is-playing .solo-arena[data-mobile-pane=robots] .board-stage,
+.is-playing .solo-arena[data-mobile-pane=robots] .arena-feed { display: none; }
+.is-playing .solo-arena .arena-cockpit .arena-player { grid-area: equipment; height: 156px; padding: 8px; grid-template-rows: 30px 50px 22px 4px; gap: 7px; }
+.is-playing .solo-arena .opponents-panel { grid-area: opponents; padding: 8px; min-height: 0; overflow: auto; }
+.is-playing .arena-cockpit .opponents-heading { display: flex; padding-bottom: 5px; }
+.is-playing .arena-cockpit .opponent summary { padding: 8px 4px; }
+.is-playing .arena-cockpit .opponent .die { display: grid; }
+.is-playing .arena-result-overlay { padding: 8px; overflow: auto; }
+.is-playing .arena-result-overlay .result-banner { padding: 12px; gap: 9px; }
+.is-playing .arena-result-overlay .result-banner h2 { font-size: 1.125rem; }
+
+/* Landscape phones can use two columns without changing a desktop viewport. */
+@media (orientation: landscape) {
+  .is-playing > .header { height: 56px; min-height: 56px; display: flex; gap: 10px; padding-block: 3px; }
+  .is-playing .player-hud { flex: 1; width: auto; max-width: 460px; }
+  .is-playing .work-layout { padding-top: 4px; }
+  .is-playing .decision-heading { min-height: 44px; padding-block: 3px; }
+  .is-playing .market-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .is-playing .market-hangar .modules:not(.compact), .is-playing .assembly-body .modules:not(.compact) { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .is-playing .inventory-section { margin-top: 4px; padding-top: 4px; }
+  .is-playing .solo-arena { grid-template-columns: minmax(0, 1fr) minmax(220px, .7fr); grid-template-rows: 78px 34px minmax(0, 1fr) 38px; grid-template-areas: 'board controls' 'board tabs' 'board feed' 'board speed'; }
+  .is-playing .solo-arena[data-mobile-pane=robots] { grid-template-columns: minmax(0, 1fr) minmax(220px, .7fr); grid-template-rows: 78px 34px minmax(0, 1fr) 38px; grid-template-areas: 'equipment controls' 'equipment tabs' 'opponents opponents' 'speed speed'; }
+  .is-playing .solo-arena .arena-cockpit .arena-player { height: 100%; min-height: 0; grid-template-rows: 26px 42px 18px 3px; gap: 4px; padding: 5px; }
+  .is-playing .draft-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: minmax(100px, 1fr); }
+  .is-playing .draft-cards .equipment { grid-template-columns: 32px minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) 24px; gap: 5px; padding: 7px; }
+  .is-playing .draft-cards .card-symbol { grid-row: 1; padding: 7px 0 0; }
+  .is-playing .draft-cards .card-desc { grid-column: 1 / -1; grid-row: 2; overflow: auto; }
+  .is-playing .draft-cards .card-foot { grid-column: 1 / -1; grid-row: 3; margin: 0 -7px -7px; border-left: 0; }
+  .is-playing .assembly-work > .selection-tools { height: 44px; min-height: 44px; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
+}

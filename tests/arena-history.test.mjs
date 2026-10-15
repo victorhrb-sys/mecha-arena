@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {newSoloGame, rememberArena} from '../dist/bots.js';
+import {serialize, deserialize} from '../dist/engine.js';
+
+test('última montagem revelada mantém posições e melhorias sem expor mudanças posteriores', () => {
+  const input = newSoloGame('Piloto', 1, 14);
+  input.phase = 'arena';
+  const piece = input.deck.pop();
+  piece.upgraded = true;
+  input.players[1].modules[2] = piece;
+  const state = rememberArena(input);
+  const saved = structuredClone(state.botMemory);
+  assert.equal(saved.players[1].unlocked, 3);
+  assert.deepEqual(saved.players[1].modules, [null, null, {type:piece.type, upgraded:true}, null, null, null]);
+  assert.equal('inventory' in saved.players[1], false);
+  assert.deepEqual(deserialize(serialize(state)).botMemory, saved);
+  piece.upgraded = false;
+  state.players[1].modules[0] = state.players[1].modules[2];
+  state.players[1].modules[2] = null;
+  state.phase = 'market';
+  state.round++;
+  assert.deepEqual(rememberArena(state).botMemory, saved);
+  state.phase = 'assembly';
+  assert.deepEqual(rememberArena(state).botMemory, saved);
+  state.phase = 'arena';
+  const next = rememberArena(state);
+  assert.equal(next.botMemory.round, state.round);
+  assert.deepEqual(next.botMemory.players[1].modules[0], {type:piece.type, upgraded:false});
+  assert.equal(next.botMemory.players[1].modules[2], null);
+});

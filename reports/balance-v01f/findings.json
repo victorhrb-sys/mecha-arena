@@ -1,0 +1,26 @@
+[
+  {
+    "title": "O ciclo existe, mas não em todas as etapas",
+    "text": "No início, AAQ venceu KKQ em 78,3% e KQQ em 59,9% dos duelos. Nas montagens intermediárias, o ciclo apareceu: ataque venceu corrida em 64,7%; corrida venceu defesa em 54,4%; defesa venceu ataque em 55,9%. Assim, o contrajogo defensivo testado não segurou o ataque inicial. São confrontos de montagens específicas, com faces variadas, não uma prova sobre todas as combinações."
+  },
+  {
+    "title": "O tamanho da mesa muda quem leva vantagem",
+    "text": "No torneio, o Agressivo venceu 61,5% dos duelos, 29,2% das mesas de três e 15,2% das de quatro. O Investidor venceu 34,0%, 39,6% e 37,6%, respectivamente. As referências simétricas são 50%, 33,3% e 25%. A economia fica competitiva nas mesas maiores sob estas políticas. Isso é um efeito conjunto de seleção, montagem e gastos; não demonstra que J sozinho cause a vantagem."
+  },
+  {
+    "title": "Evoluções têm efeitos muito diferentes",
+    "text": "Com K + Q de apoio no início de um duelo, melhorar A elevou a vitória de 42,6% para 77,2%; melhorar K, de 51,3% para 68,4%. Já adquirir a terceira Q e combinar duas Q equipadas reduziu a vitória em 4,6 pontos percentuais (IC 95%: −7,0 a −2,2). Duas Q comuns e uma Q melhorada concedem o mesmo HP passivo, mas a tripla perde uma face de cura até repor a vaga. O custo de aquisição não entra nesses testes de arena."
+  },
+  {
+    "title": "O Coletor sofre quando falta tempo para reinvestir",
+    "text": "Na escolha inicial controlada do perfil Equilibrado, K + Q + J venceu 52,5% das partidas iniciadas em 0–0, contra 61,3% com um K adicional. No cenário 4–4, foram 27,1% com J e 57,9% com K. No perfil Investidor, J ficou 3,8 pontos abaixo de K em 0–0, mas o IC da diferença incluiu zero; em 4–4 ficou 30,0 pontos abaixo. Não há evidência de J dominar a abertura dos duelos. Em 4–4 com três módulos, perder força imediata por renda futura foi claramente ruim."
+  },
+  {
+    "title": "O valor marginal do Escudo depende da proteção que já existe",
+    "text": "Nas montagens intermediárias de três e quatro jogadores, adicionar Q comum foi a melhor estimativa entre as quatro opções: 38,3% e 29,6% de vitória. Na base avançada, que já inclui Q e Q melhorado, melhorar a Q adicional aumentou a vitória em apenas 0,8 a 1,3 pontos percentuais. Isso indica retorno marginal pequeno nessa base protegida, não que Escudo seja fraco em todo final de partida. A base avançada também tem mais melhorias que os adversários; compare cartas dentro da etapa, não taxas absolutas entre etapas."
+  },
+  {
+    "title": "A melhoria paga quase não apareceu em mesas pequenas",
+    "text": "Houve 24 melhorias pagas nas 5.040 partidas de dois jogadores, 14 nas 1.680 de três e 940 nas 1.680 de quatro. Partidas de quatro duraram em média 11,85 arenas, contra 7,42 nos duelos. O preço de 12 sucatas e a prioridade de compras dos bots são candidatos conjuntos à investigação; a frequência baixa não prova que o preço esteja errado. Antes da v0.2, priorizar testes de contrajogo ao ataque inicial, perda de faces na tripla de Q e incentivo para poupar pela melhoria paga. Calibrar os perfis com decisões humanas antes de tratá-los como uma população representativa."
+  }
+]
