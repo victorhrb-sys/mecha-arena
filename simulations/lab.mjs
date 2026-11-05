@@ -1,3 +1,5 @@
+// Experiment harness, separate from the playable Laboratory mode in solo.js.
+// It drives the actual engine with controlled fixtures and reproducible seeds.
 import {act, newGame, currentPlayer, validateState, maxHp, allCards, INITIAL_SCRAP} from '../dist/engine.js';
 import {chooseAction, decisionView, rememberArena, createPersona} from '../dist/bots.js';
 import {chooseAction as legacyAction} from './legacy-bots.mjs';

@@ -3,6 +3,8 @@ import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {BOT_PROFILES} from '../dist/bots.js';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+// Consume a finished experiment; this script does not simulate matches. The
+// Markdown follows folder, while the generated HTML always goes to dist/balance.html.
 const folder = path.resolve(root, process.argv[2] ?? 'reports/balance-v01f');
 const data = JSON.parse(await readFile(path.join(folder, 'summary.json'), 'utf8'));
 const names = {A: 'Canhão', K: 'Propulsor', Q: 'Escudo', J: 'Coletor'};

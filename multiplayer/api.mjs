@@ -1,3 +1,5 @@
+// Fetch-compatible HTTP boundary shared by Node and the hosted worker.
+// Parse/validate requests here; room rules, identity and persistence stay below.
 import {createRoomService, RoomError} from './rooms.mjs';
 import {createProfileService,profileName} from './profiles.mjs';
 

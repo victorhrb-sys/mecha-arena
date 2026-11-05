@@ -135,6 +135,8 @@ function plannedLoadout(player, ctx) {
     + noise(`${ctx.brain.seed}:slot:${c.id}`) * (1 - ctx.brain.skill) * 2.5;
   return chosen.sort((a, b) => priority(a) - priority(b) || a.id.localeCompare(b.id));
 }
+// Choose one legal intent from a restricted view. The caller applies it through
+// the engine and repeats until human input is needed; a policy never owns state.
 export function chooseAction(view) {
   const {phase, player, choices = [], choiceDone = false} = view;
   // Old saves retain the classic policy, without changing their RNG or equipment.

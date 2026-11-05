@@ -1,0 +1,142 @@
+{
+  "version": "v0.1f",
+  "seed": 20260911,
+  "samples": 1800,
+  "matches": 240,
+  "maxRolls": 600,
+  "maxRounds": 100,
+  "generated": "2026-09-11T04:44:09.704Z",
+  "protocol": "1.0",
+  "hashes": {
+    "dist/engine.js": "fb183f01c910bf49e096214c24cb5eb095a53e669955b3f6ecdcf31b1a3b15df",
+    "dist/bots.js": "076001c6c2a6cc5c09aa78828111677fc3c089ed8bd8db126a2375fea3345e90",
+    "simulations/legacy-bots.mjs": "1bc9a64efc212b1e87bcd6dd4b16441d0718697f231b364c05cbc54845ff407e",
+    "simulations/lab.mjs": "d33c8ad4f31fb921bca85d9219516b2ff0771a1d53eae9d2276094443a86befa",
+    "simulations/run.mjs": "8f902cb7c63d56e13dffb266a5378d3bc73b8b1025c692099ee57c14d8c44e7b"
+  },
+  "controlledArenas": 187200,
+  "fullMatches": 8400,
+  "choiceMatches": 3840,
+  "choiceArenas": 16474,
+  "censoredChoiceMatches": 0,
+  "matchArenas": 73866,
+  "censoredMatches": 0,
+  "elapsedSeconds": 236.103,
+  "stages": {
+    "opening": {
+      "name": "Início · 3 módulos",
+      "round": 1,
+      "background": [
+        "K",
+        "Q"
+      ],
+      "builds": {
+        "attack": [
+          "A",
+          "A",
+          "Q"
+        ],
+        "race": [
+          "K",
+          "K",
+          "Q"
+        ],
+        "defense": [
+          "K",
+          "Q",
+          "Q"
+        ],
+        "economy": [
+          "K",
+          "Q",
+          "J"
+        ]
+      }
+    },
+    "middle": {
+      "name": "Meio · 5 módulos",
+      "round": 4,
+      "background": [
+        "A",
+        "K",
+        "Q",
+        "J"
+      ],
+      "builds": {
+        "attack": [
+          "A",
+          "A",
+          "K",
+          "Q",
+          "J"
+        ],
+        "race": [
+          "K",
+          "K",
+          "A",
+          "Q",
+          "J"
+        ],
+        "defense": [
+          "K",
+          "Q",
+          "Q",
+          "A",
+          "J"
+        ],
+        "economy": [
+          "K",
+          "Q",
+          "J",
+          "J",
+          "A"
+        ]
+      }
+    },
+    "late": {
+      "name": "Avançado · 6 módulos",
+      "round": 8,
+      "background": [
+        "A*",
+        "K",
+        "Q",
+        "J",
+        "Q*"
+      ],
+      "builds": {
+        "attack": [
+          "A*",
+          "A",
+          "K",
+          "Q",
+          "J",
+          "K"
+        ],
+        "race": [
+          "K*",
+          "K",
+          "A",
+          "Q",
+          "J",
+          "A"
+        ],
+        "defense": [
+          "Q*",
+          "Q",
+          "K",
+          "A",
+          "J",
+          "K"
+        ],
+        "economy": [
+          "J*",
+          "J",
+          "K",
+          "Q",
+          "A",
+          "K"
+        ]
+      }
+    }
+  }
+}

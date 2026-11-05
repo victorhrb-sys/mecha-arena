@@ -1,6 +1,6 @@
 # Rodada de balanceamento da v0.1f
 
-Esta rodada mantém as regras de `dist/engine.js`. O objetivo é identificar sinais de desequilíbrio e limitações dos bots antes de decidir a v0.2. Os resultados não estimam a população de jogadores humanos: os perfis são hipóteses ainda não calibradas com partidas humanas.
+Este documento registra a rodada histórica da v0.1f. As regras daquela medição incluíam três sucatas iniciais; o motor atual começa com zero. Para novas medições, veja [Desenvolvimento](DESENVOLVIMENTO.md). A rodada original manteve as regras então presentes em `dist/engine.js`. O objetivo é identificar sinais de desequilíbrio e limitações dos bots antes de decidir a v0.2. Os resultados não estimam a população de jogadores humanos: os perfis são hipóteses ainda não calibradas com partidas humanas.
 
 ## Bots
 
@@ -43,13 +43,15 @@ Sem pacotes adicionais, com Node.js disponível:
 
 ```sh
 node --test tests/*.test.mjs
-node simulations/run.mjs --samples 1800 --matches 240 --seed 20260911
-node simulations/report.mjs
+node simulations/run.mjs --samples 1800 --matches 240 --seed 20260911 --out reports/local-experiment
+node simulations/report.mjs reports/local-experiment
 ```
 
 `--samples` define repetições por cenário controlado. `--matches` define repetições de cada par no torneio de duelos, blocos de sete nas mesas mistas e repetições por escolha inicial. Para amostras equilibradas entre assentos e adversários, use múltiplos de 12. `--out` permite salvar outra rodada; o gerador de relatório aceita a pasta como argumento.
 
-Artefatos em `reports/balance-v01f/`:
+Esses comandos medem o motor atual; não reproduzem exatamente a rodada histórica. Os dados originais continuam disponíveis no [histórico público](https://github.com/victorhrb-sys/mecha-arena/tree/80ec88fb5feb1416dc62aa8ea9006670394fdfe1/reports/balance-v01f). A árvore atual conserva o relatório, os achados e `metadata.json` com os parâmetros e hashes originais.
+
+Artefatos gerados na pasta escolhida com `--out`:
 
 - `summary.json`: agregações, parâmetros e SHA-256 dos arquivos usados.
 - `matches.jsonl`: partidas do torneio com montagens, sucata e resultado por arena.
@@ -57,4 +59,4 @@ Artefatos em `reports/balance-v01f/`:
 - `matches.csv`: resultado e ações por participante no torneio.
 - `RELATORIO.md`: leitura dos resultados e prioridades para discussão.
 
-O painel local fica em `dist/balance.html`, acessível pelo mesmo servidor do jogo em `/balance.html`. O relatório é uma fotografia da execução, não roda simulações enquanto é aberto. A semente permite reproduzir resultados; data e tempo de execução variam.
+O painel gerado fica em `dist/balance.html` e pode ser aberto diretamente no navegador. O servidor multiplayer não serve `/balance.html`. O relatório é uma fotografia da execução, não roda simulações enquanto é aberto. A semente permite reproduzir resultados; data e tempo de execução variam.

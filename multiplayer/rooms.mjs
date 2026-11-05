@@ -81,6 +81,9 @@ export function createRoomService(store, {now = Date.now, seed = () => crypto.ge
     requireRoom(room && room.updatedAt + TTL > now(), 'Sala não encontrada ou expirada. Confira o código.', 404);
     return room;
   }
+  // Optimistic concurrency: read, transform, then save only if the revision is
+  // unchanged. A lost race retries against fresh state; change must not perform
+  // external side effects because it can run more than once.
   async function mutate(code, change) {
     for (let attempt = 0; attempt < 8; attempt++) {
       const room = await read(code), previous = room.revision;
@@ -135,6 +138,8 @@ export function createRoomService(store, {now = Date.now, seed = () => crypto.ge
           return {unchanged: true, value: action.type === 'LEAVE' ? {left: true} : roomView(room, playerId(room, hash))};
         }
         const id = playerId(room, hash);
+        // Independent preparation uses a per-seat revision plus match/round
+        // epoch. Shared market and combat actions use the whole-room revision.
         if(input.preparation) {
           const seat=room.game?.preparation?.seats[id];
           requireRoom(seat&&input.preparation.epoch===preparationEpoch(room,room.game)&&input.preparation.revision===seat.revision,

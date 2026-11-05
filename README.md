@@ -32,20 +32,52 @@ Um exemplo: a estratégia agressiva teve mais sucesso nos duelos, enquanto a est
 
 [Leia o relatório dos experimentos](reports/balance-v01f/RELATORIO.md).
 
+## Modos de jogo
+
+| Modo | Como funciona |
+| --- | --- |
+| Single player | Uma pessoa contra 1–3 bots, com progresso salvo no navegador. |
+| Multiplayer | Salas para 2–4 participantes, combinando pessoas e bots; estado oficial no servidor. |
+| Laboratório | Partida local com carga e críticos, usando um save separado. |
+
+A interface está em português e a prioridade atual é desktop. Os perfis online são públicos e selecionados pelo nome, sem senha; o controle do robô depende da sessão privada da sala. [Como jogar e retomar uma partida](docs/JOGAR.md).
+
 ## Experimentar localmente
 
-Com **Node.js 24 ou posterior**, execute na pasta do projeto:
+Com **Node.js 24 ou posterior**, sem instalar dependências:
 
-```bash
+```sh
+git clone --depth 1 https://github.com/victorhrb-sys/mecha-arena.git
+cd mecha-arena
 node server.mjs
 ```
 
-Depois, abra **http://127.0.0.1:43818**.
+Abra **http://127.0.0.1:43818**. No Windows, também é possível iniciar pelo `JOGAR.cmd`.
 
-Para executar os testes:
-
-```bash
+```sh
 node --test tests/*.test.mjs
+node scripts/check.mjs
 ```
 
+O servidor usa SQLite nativo do Node. Os modos locais executam o motor no navegador; as salas usam o mesmo motor no servidor. Não há framework de interface ou serviço de IA em tempo de execução.
+
+## Entender o código
+
+Comece por [como o jogo funciona](docs/ARQUITETURA.md): o guia acompanha uma ação desde o clique até o próximo estado, explica a ordem do combate e mostra como os bots e as salas usam o motor.
+
+| Quero entender… | Onde começar |
+| --- | --- |
+| Regras, fases e conservação das cartas | [Motor](dist/engine.js) e [arquitetura](docs/ARQUITETURA.md) |
+| Decisões dos bots | [Política dos bots](dist/bots.js) |
+| Salas, privacidade e comandos simultâneos | [Serviço de salas](multiplayer/rooms.mjs) |
+| Interface e replay de rolagens | [Coordenador da interface](dist/app.js) |
+| Executar, validar e medir mudanças | [Guia de desenvolvimento](docs/DESENVOLVIMENTO.md) |
+| Regras de carga e crítico | [Laboratório](docs/LABORATORIO.md) |
+
+`dist/` contém fontes editadas diretamente, apesar do nome. Bancos, caches e dados brutos gerados não fazem parte da árvore atual do repositório. Os experimentos históricos usaram uma versão anterior das regras, inclusive três sucatas iniciais; hoje a partida começa com zero. [Escopo do repositório e dados históricos](docs/REPOSITORIO.md).
+
 O projeto segue em desenvolvimento. As próximas mudanças partem das partidas, dos testes e das perguntas que os experimentos deixam em aberto.
+
+## Créditos
+
+As atribuições dos ícones e os registros disponíveis sobre as imagens estão em [Créditos e recursos](docs/CREDITOS.md). Ainda não foi definida uma licença geral de reutilização para o projeto.

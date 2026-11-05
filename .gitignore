@@ -1,10 +1,36 @@
+# Installed dependencies and local tools.
 node_modules/
+.pnpm-store/
+.codex/
+.agents/
+.codex-remote-attachments/
+.tmp/
+/AGENTS.md
+/versions/
+
+# Hosting configuration, sessions, databases and credentials.
+.openai/
 .runtime/
 .sites-runtime/
-.openai/
-.tmp/
 .env
 .env.*
+!.env.example
 *.log
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.pem
+*.key
+
+# dist/ contains source; only these outputs are generated.
 /dist/server/
 /dist/.openai/
+/dist/balance.html
+
+# Keep the historical written report; generate new measurements locally.
+/reports/local-*/
+/reports/*/summary.json
+/reports/*/matches.csv
+/reports/*/matches.jsonl
+/reports/*/opening-choices.jsonl

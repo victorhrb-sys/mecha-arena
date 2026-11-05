@@ -1,3 +1,5 @@
+// Transport and browser-held room credentials; no rules are resolved here.
+// A public profile name and a private room token have different responsibilities.
 export const SESSION_KEY = 'mecha-arena.multiplayer.sessions.v1';
 const CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const randomHex = length => [...crypto.getRandomValues(new Uint8Array(length))].map(n => n.toString(16).padStart(2, '0')).join('');
@@ -72,6 +74,8 @@ export function createRoomClient({onUpdate, onStatus, storage = localStorage, fe
     async command(action) {
       if (busy || !room) return;
       busy = true;
+      // Retry the same command ID after an uncertain network result. A new ID
+      // would describe a second action; the server retains receipts for retries.
       const body = {action, commandId: randomHex(16), revision: room.revision,preparation:room.preparation};
       try {
         let value;

@@ -1,3 +1,6 @@
+// Shared rules for the browser, room server and simulations. Public transitions
+// copy the input; helpers below mutate only that working copy. See docs/ARQUITETURA.md.
+// VERSION describes saved-state compatibility, not the published game release.
 export const VERSION = 1;
 export const INITIAL_SCRAP = 0;
 export const UPGRADE_COST = 12;
@@ -35,6 +38,8 @@ export const CARDS = {
 };
 const copy = x => JSON.parse(JSON.stringify(x));
 function requireRule(condition, message) {if (!condition) throw new Error(message);}
+// Keep randomness in the saved state: the same state and actions replay the same
+// draws. Bot preferences and animation timers must not consume this stream.
 function random(s) {
   s.rng = (s.rng + 0x6D2B79F5) >>> 0;
   let t = s.rng; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61);
@@ -60,6 +65,8 @@ function detach(p,id) {
   requireRule(index>=0,'Este equipamento não está com o jogador da vez.');
   return p.inventory.splice(index,1)[0];
 }
+// A triple keeps one physical card and returns the other two to the deck.
+// Upgrading changes a card's effect, never the number of cards in circulation.
 function combine(s,p) {
   for(const type of TYPES) {
     let group=allCards(p).filter(c=>c.type===type&&!c.upgraded);
@@ -96,6 +103,8 @@ export function newGame(names, seed=Date.now()) {
     draft:{player:0,picks:0,choices:[]},market:null};
   s.reference=Math.floor(random(s)*names.length);draftOptions(s);return s;
 }
+// Start after the reference player, then reverse: the reference buys twice at
+// the turn-around. A drawn arena keeps the previous reference.
 export function purchaseOrder(count,reference) {
   const first=Array.from({length:count},(_,i)=>(reference+1+i)%count);
   return [...first,...first.slice().reverse()];
@@ -154,6 +163,8 @@ function attackGroup(s,actors) {
   damage.forEach((n,id)=>{s.players[id].hp=Math.max(0,s.players[id].hp-n);s.players[id].alive=s.players[id].hp>0;});
   return {lines,attacks};
 }
+// Resolve a whole roll before displaying it. lastRoll stores the intermediate
+// snapshots needed for animation; forcedDice is a test hook, not a room command.
 export function resolveRoll(input, forcedDice) {
   requireRule(input.phase==='arena','A rolagem só está disponível na Arena.');
   const s=copy(input),lab=isLaboratory(s),chargedIds=[],criticalIds=[],emptyCriticalIds=[],chargeGains=[];s.rollCount++;
@@ -174,6 +185,8 @@ export function resolveRoll(input, forcedDice) {
   });
   const roll={number:s.rollCount,dice:s.players.map(p=>p.dice),before:snapshot(s),events:[]};
   if(lab)Object.assign(roll,{diceResults:s.players.map(p=>[...p.diceResults]),chargedIds,criticalIds,emptyCriticalIds,chargeGains});
+  // Order is part of the rules: face first, then A/K/Q/J. Check victory after
+  // each simultaneous group, so an earlier group can prevent later activations.
   for(let face=1;face<=6&&s.phase==='arena';face++) for(const type of TYPES) {
     if(s.phase!=='arena') break;
     const actors=s.players.filter(p=>p.alive&&(lab?p.diceResults.includes(face)&&face<=p.unlocked:p.dice===face)&&p.modules[face-1]?.type===type)
@@ -194,6 +207,9 @@ export function resolveRoll(input, forcedDice) {
   if(!roll.events.length) roll.events.push({face:null,type:null,activeIds:[],lines:['Nenhum equipamento ativado. Role os dados novamente.'],snapshot:snapshot(s),simultaneous:false});
   s.lastRoll=roll;return s;
 }
+// Rules entry point: return the next state or throw without changing input.
+// Room authorization lives in rooms.mjs; playerId here selects a preparation
+// seat. Sequential local play normally uses currentPlayer instead.
 export function act(input, action, playerId) {
   requireRule(input&&input.version===VERSION,'Partida incompatível.');
   if(action.type==='ROLL') return resolveRoll(input);
@@ -284,6 +300,8 @@ export function act(input, action, playerId) {
   if(seat)seat.revision++;
   return s;
 }
+// Validate persisted states and fixtures, including card conservation across
+// deck, offers, installed modules and reserves. This is not session authorization.
 export function validateState(s) {
   requireRule(s?.version===VERSION,'Versão da partida salva não reconhecida.');
   requireRule(s.ruleset===undefined||isLaboratory(s),'Regras da partida salva não reconhecidas.');

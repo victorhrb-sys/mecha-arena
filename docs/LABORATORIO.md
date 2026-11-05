@@ -1,6 +1,6 @@
 # Laboratório — Carga e Crítico
 
-Decisão de Victor em 18/09/2026, confirmada após entrevista grill-me/grilling na tarefa `01a0b53c-67ba-7e20-93b0-5abf956a109f`.
+Regras experimentais definidas e revisadas em 18/09/2026.
 
 Terceira entrada do Mecha Arena, abrindo diretamente uma partida local contra 1–3 bots (padrão 3). Compartilha o motor e a interface do single player. O experimento usa `laboratory-v2` e salva em `mecha-arena.laboratory.v1`; o single player continua em `mecha-arena.solo.v1`. Revanche conserva o modo e inicia com zero carga. Salas e perfis online não recebem estas regras.
 

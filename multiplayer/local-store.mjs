@@ -8,6 +8,7 @@ export function localStore(filename) {
   db.exec('PRAGMA journal_mode = WAL');
   db.exec('PRAGMA busy_timeout = 5000');
   const journal = JSON.parse(readFileSync(new URL('../drizzle/meta/_journal.json', import.meta.url), 'utf8'));
+  // user_version stores the next migration index, not the game/save version.
   const applied = db.prepare('PRAGMA user_version').get().user_version;
   for (const entry of journal.entries.filter(entry => entry.idx >= applied)) {
     const sql = readFileSync(new URL(`../drizzle/${entry.tag}.sql`, import.meta.url), 'utf8');

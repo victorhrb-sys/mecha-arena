@@ -1,3 +1,5 @@
+// UI coordinator for all three entries. Rules live in engine.js; this module
+// routes actions, renders the current view and plays already-resolved events.
 import {currentPlayer,CARDS,COLORS,allCards,maxHp,UPGRADE_COST,isLaboratory,draftPickCount} from './engine.js';
 import {createRoomClient} from './network.js';
 import {createProfileClient} from './profiles.js';
@@ -11,6 +13,8 @@ import {marketCycle} from './market-cycle.js';
 import {unseenMarketSteps} from './market-presentation.js';
 
 const app=document.querySelector('#app'),dialog=document.querySelector('#dialog');
+// game is a complete state locally, but a private per-player projection online.
+// playback is presentation state; queuedView holds only the newest room update.
 let room=null,localId=0,lobby=false,queuedView=null,online=false,connectionMessage='';
 let joinCode=new URLSearchParams(location.search).get('sala')?.toUpperCase()??'';
 let mode=joinCode?'multiplayer':'landing',soloSaved=null,soloLoadError='',botCount=3;
@@ -63,6 +67,8 @@ const client=createRoomClient({onUpdate:receiveRoom,onStatus:(text,connected)=>{
 }});
 function isHost(){return localMode()||room?.hostId===localId;}
 function inviteUrl(){return location.origin+location.pathname+'?sala='+room.code;}
+// Do not replace the DOM under a dragged piece or interrupt a recorded replay.
+// Once the interaction ends, apply the latest authoritative view in one step.
 function receiveRoom(value){
   if(mode!=='multiplayer')return;
   if(playback||marketPlayback||pieceDragging){queuedView=value;return;}
@@ -393,6 +399,8 @@ function renderArena(){
     </div><aside class="arena-cockpit">${dicePresentation()}${arenaPlayer(p)}<section class="opponents-panel"><div class="opponents-heading"><h2>Adversários</h2><span>Pontos / 5</span>${help('Abra um adversário para consultar seus equipamentos e sucata. Robôs eliminados voltam na próxima arena.','adversários')}</div><div class="opponents">${players.filter(p=>p.id!==localId).map(opponent).join('')}</div></section>${speedControl()}</aside></main>`;
 }
 
+// Rendering replaces the app subtree. Preserve focus/scroll explicitly and
+// defer replacement during drags; event handlers are delegated to document.
 function render(){
   if(speedDragging||pieceDragging){renderPending=true;return;}
   if(playback?.diceStage==='rolling'){
@@ -412,6 +420,8 @@ function render(){
   if(focusKey){const next=[...app.querySelectorAll('[data-action]')].find(el=>!el.disabled&&el.dataset.action===focusKey.action&&el.dataset.id===focusKey.id&&el.dataset.slot===focusKey.slot&&el.dataset.count===focusKey.count);next?.focus({preventScroll:true});}
   if(speedFocused)document.querySelector('#playback-speed')?.focus({preventScroll:true});
 }
+// One action gateway: local modes transition and save in the browser; rooms
+// send a command and wait for the server's projected result in receiveRoom.
 async function dispatch(action){
   if(home||lobby||playback||marketPlayback||sending||!connected()||(isWaiting(game)&&!(canImprove()&&['UNLOCK','UPGRADE'].includes(action.type))))return;
   if(['ROLL','NEXT_ARENA','REMATCH'].includes(action.type)&&!isHost())return;
@@ -438,6 +448,8 @@ function enterSolo(state){
   selected=null;message='';connectionMessage='';soloLoadError='';persistSolo();render();
 }
 
+// Replay snapshots from lastRoll only. Replaying or changing playback speed
+// never rolls dice, grants resources or sends another command.
 function animateRoll(){
   const motion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   playback={snapshot:game.lastRoll.before,eventIndex:-1,activeIds:[],diceStage:motion?'reveal':'rolling',diceTime:0};render();

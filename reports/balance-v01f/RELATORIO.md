@@ -165,9 +165,11 @@ Mesmos K + Q iniciais, adversário, semente e assento por comparação; a tercei
 
 A ordem de módulos também muda a precedência dos efeitos; os testes de carta embaralham faces, e as intervenções de face medem mudanças específicas. O Escudo aumenta HP passivo; o Coletor exige medir retorno econômico. A melhoria paga de 12 sucatas acontece no torneio, mas a comparação “comum/melhorada” nas arenas não é uma estimativa do retorno desse gasto.
 
-O protocolo completo está em [SIMULACOES.md](../../docs/SIMULACOES.md). Parâmetros, resumos e hashes estão em [summary.json](summary.json); trajetórias em [matches.jsonl](matches.jsonl) e [opening-choices.jsonl](opening-choices.jsonl).
+O protocolo completo está em [SIMULACOES.md](../../docs/SIMULACOES.md). Parâmetros e hashes originais estão em [metadata.json](metadata.json). Os resumos completos e as trajetórias foram preservados no [histórico público da rodada](https://github.com/victorhrb-sys/mecha-arena/tree/80ec88fb5feb1416dc62aa8ea9006670394fdfe1/reports/balance-v01f).
 
-## Reproduzir
+## Comandos da rodada original
+
+Este relatório usou uma versão anterior do motor, com três sucatas iniciais. Os comandos abaixo registram a execução original. Para medir o motor atual sem sobrescrever esta referência, use uma nova pasta com `--out`, conforme o [guia de desenvolvimento](../../docs/DESENVOLVIMENTO.md).
 
 ```sh
 node simulations/run.mjs --samples 1800 --matches 240 --seed 20260911

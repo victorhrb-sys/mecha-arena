@@ -49,6 +49,6 @@ A política original de bots é reutilizada com uma projeção restrita das info
 
 A primeira implementação ainda deve ser exercitada manualmente em computadores e celulares diferentes: conforto dos turnos, visibilidade dos controles, comportamento das animações em conexões lentas e duração da espera entre decisões. Os testes automatizados cobrem a lógica, os fluxos HTTP e a renderização; não são uma rodada manual em dispositivos físicos.
 
-Depois dessa estabilização, integrar **Jogar contra bots** e **Jogar online** numa tela inicial comum, preservando o motor compartilhado.
+A tela inicial comum já oferece Single player, Multiplayer e Laboratório, preservando motor e interface compartilhados. Veja os fluxos atuais em [JOGAR.md](JOGAR.md).
 
 Instruções de uso e limites estão no [README](../README.md).

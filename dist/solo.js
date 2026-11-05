@@ -1,3 +1,5 @@
+// Local-mode boundary: normal and Laboratory games share the engine and bots,
+// but use separate save keys and never contribute to online profile statistics.
 import {serialize,deserialize,isLaboratory,enableLaboratory,migrateLaboratory} from './engine.js';
 import {newSoloGame,actAsHuman,advanceBots} from './bots.js';
 

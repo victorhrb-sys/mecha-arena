@@ -9,6 +9,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2), option = (key, fallback) => args.includes(key) ? Number(args[args.indexOf(key) + 1]) : fallback;
 const samples = option('--samples', 1200), matches = option('--matches', 180), seed = option('--seed', 20260911);
 for (const [name, n] of Object.entries({samples, matches, seed})) if (!Number.isSafeInteger(n) || n < 1) throw new Error(`Invalid ${name}`);
+// Historical default: pass --out for new experiments to preserve the reference
+// report. See docs/DESENVOLVIMENTO.md for a small, isolated example.
 const outArg = args.indexOf('--out'), out = path.resolve(root, outArg < 0 ? 'reports/balance-v01f' : args[outArg + 1]);
 await mkdir(out, {recursive: true});
 const started = Date.now(), summary = {metadata: {version: 'v0.1f', seed, samples, matches, maxRolls: 600, maxRounds: 100,

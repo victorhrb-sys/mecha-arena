@@ -23,6 +23,9 @@ export class D1RoomStore {
     const named=players.map((p,i)=>({name:profiles[i]?.name??p.name,points:p.points,bot:bots[i]}));
     const summary=JSON.stringify({players:named,winner:named[room.game.result.winner].name,
       arenas:room.game.round,botCount:bots.filter(Boolean).length});
+    // The result INSERTs run in the same batch as the conditional room UPDATE.
+    // Match the exact saved data as well as the revision: a losing writer must
+    // not credit its proposed winner after another command wins the race.
     const statements=[update,...players.flatMap((p,i)=>bots[i]?[]:[this.db.prepare(`INSERT OR IGNORE INTO profile_results
       (profile_id,match_id,played_at,won,arena_wins,data)
       SELECT ?,?,?,?,?,? WHERE EXISTS (SELECT 1 FROM rooms WHERE code=? AND revision=? AND data=?)`)
